@@ -52,7 +52,15 @@ Your finished project must include all of the following requirements (further in
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
-1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.    
+    - when using sessions, each client will have a unique session stored on the server. To transmit authentication info between client and server, we will use cookies. With server-side sessions, you will either have to store the sessio identifier in a database, or else keep it in memory and make sure that the client always hits the same server. The database session sotrage becomes a bottleneck and a thing to maintain - essentially an extra query to be done with every request. With in-memory solution, you limit your horizontal scaling, and sessions will be affected by network issues. 
+    - JWT is a way to transimit info between parties in the form of a JSON object, consisting of header, payload, signature. Typically, a private key, or secret, is used by the issuer to sign the JWT. The receiver of the JWT will verify the signature to ensure that the token hasn't been altered after it was signed. You eliminate a DB round trip, which in turns enable horizontal scalibility. 
+
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+    - bcrypt has the following features: password hashing funciton, implements salting both manually and automatically, accumulative hashing rounds. It isn't really saving or storing these hashes, but actually hashing or encrypting everything entered, and comparing the hashes.  
+
 3. How are unit tests different from integration and end-to-end testing?
+    - unit tests test individual modules of an application in isolation to confirm that the code is doing things right. Integration testing checks if different modules are working fine when combined together as a group. End-to-end testing is used to test entire software from starting to end along with its integration with the external interfaces. 
+
 4. How does _Test Driven Development_ change the way we write applications and tests?
+    - it makes the developer focus on requirements before wrting code, creates a detailed specification, reduces time spent on rework.
